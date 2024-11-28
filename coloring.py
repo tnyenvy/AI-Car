@@ -11,19 +11,20 @@ def draw_map(solution):
 
     # Tọa độ các vùng
     coordinates = {
-        'WA': (1, 2),
-        'NT': (2, 3),
-        'Q': (3, 3),
-        'SA': (2, 2),
-        'NSW': (3, 2),
-        'V': (3, 1),
-        'T': (3, 0),
+        'WA': (1, 3),
+        'NT': (2, 4),
+        'Q': (3, 4),
+        'SA': (2, 3),
+        'NSW': (3, 3),
+        'V': (3, 2),
+        'T': (3, 1.2),  # Di chuyển Tasmania gần hơn
     }
 
     # Kết nối các vùng liền kề
     connections = [
         ('SA', 'WA'), ('SA', 'NT'), ('SA', 'Q'), ('SA', 'NSW'), ('SA', 'V'),
-        ('WA', 'NT'), ('NT', 'Q'), ('Q', 'NSW'), ('NSW', 'V')
+        ('WA', 'NT'), ('NT', 'Q'), ('Q', 'NSW'), ('NSW', 'V'),
+        ('V', 'T'),  # Thêm kết nối Tasmania
     ]
 
     # Ánh xạ màu từ ký hiệu
@@ -48,7 +49,7 @@ def draw_map(solution):
 
     # Cài đặt giao diện đồ thị
     ax.set_xlim(0, 4)
-    ax.set_ylim(-1, 4)
+    ax.set_ylim(0, 5)
     ax.axis('off')
     st.pyplot(fig)
 
@@ -79,6 +80,7 @@ constraints = [
     (('NT', 'Q'), constraint_func),
     (('Q', 'NSW'), constraint_func),
     (('NSW', 'V'), constraint_func),
+    (('V', 'T'), constraint_func),  # Thêm ràng buộc kết nối Tasmania
 ]
 
 # Giải bài toán
